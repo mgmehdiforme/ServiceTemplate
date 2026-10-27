@@ -41,12 +41,13 @@ dotnet run --project src/OrderingService.Api
 ---
 
 ## Detailed Documentation
-Complete documentation, architecture blueprints, step-by-step developer guides, and messaging specifications:
+Complete documentation, architecture blueprints, step-by-step developer guides, and messaging specifications are located in the [Documention](Documention/) folder:
 
-- 📐 [Architecture Specification](docs/01_ARCHITECTURE_SPECIFICATION.md) - Deep architectural design, component topologies, trade-off matrices, and technology selections.
-- 📋 [Product Requirements Specification](docs/02_PRODUCT_REQUIREMENTS_SPECIFICATION.md) - Functional specifications, user stories, and acceptance criteria.
-- 🛠️ [Developer Guide](docs/03_DEVELOPER_GUIDE.md) - Step-by-step guide to adding vertical slices, offline mock AI, Docker dev stacks, migrations, and deployment.
-- 📡 [API & Messaging Reference](docs/04_API_AND_MESSAGING_REFERENCE.md) - HTTP Minimal API schemas, SSE streaming, RFC 7807 problem details, Wolverine outbox/inbox schema, and RabbitMQ topologies.
+- 📐 [Architecture Specification](Documention/01_ARCHITECTURE_SPECIFICATION.md) - Deep architectural design, component topologies, trade-off matrices, and technology selections.
+- 📋 [Product Requirements Specification](Documention/02_PRODUCT_REQUIREMENTS_SPECIFICATION.md) - Functional specifications, user stories, and acceptance criteria.
+- 🛠️ [Developer Guide](Documention/03_DEVELOPER_GUIDE.md) - Step-by-step guide to adding vertical slices, offline mock AI, Docker dev stacks, migrations, and deployment.
+- 📡 [API & Messaging Reference](Documention/04_API_AND_MESSAGING_REFERENCE.md) - HTTP Minimal API schemas, SSE streaming, RFC 7807 problem details, Wolverine outbox/inbox schema, and RabbitMQ topologies.
+- ✅ [QA Verification Report](Documention/05_QA_VERIFICATION_REPORT.md) - Automated test run logs, static checks, template installation audit, and security review sign-off.
 
 ---
 

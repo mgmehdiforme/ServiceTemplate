@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Architecture Team",
+  "classifications": ["Microservice", "Enterprise", ".NET 9", "Wolverine", "pgvector"],
+  "name": "Enterprise .NET 9 Microservice Chassis",
+  "identity": "Enterprise.Microservice.Chassis.Template",
+  "shortName": "microservice-chassis",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "ServiceTemplate",
+  "preferNameDirectory": true,
+  "symbols": {
+    "includeRabbitMq": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include RabbitMQ external transport configuration."
+    },
+    "includeAi": {
+      "type": "parameter",
+      "datatype": "bool",
+      "defaultValue": "true",
+      "description": "Include Microsoft.Extensions.AI and pgvector semantic search."
+    }
+  }
+}

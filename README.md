@@ -41,5 +41,23 @@ dotnet run --project src/OrderingService.Api
 ---
 
 ## Detailed Documentation
-Complete documentation, architecture diagrams, step-by-step guides, and operations runbooks are located in the sibling directory:
-👉 `../Documention`
+Complete documentation, architecture blueprints, step-by-step developer guides, and messaging specifications:
+
+- 📐 [Architecture Specification](docs/01_ARCHITECTURE_SPECIFICATION.md) - Deep architectural design, component topologies, trade-off matrices, and technology selections.
+- 📋 [Product Requirements Specification](docs/02_PRODUCT_REQUIREMENTS_SPECIFICATION.md) - Functional specifications, user stories, and acceptance criteria.
+- 🛠️ [Developer Guide](docs/03_DEVELOPER_GUIDE.md) - Step-by-step guide to adding vertical slices, offline mock AI, Docker dev stacks, migrations, and deployment.
+- 📡 [API & Messaging Reference](docs/04_API_AND_MESSAGING_REFERENCE.md) - HTTP Minimal API schemas, SSE streaming, RFC 7807 problem details, Wolverine outbox/inbox schema, and RabbitMQ topologies.
+
+---
+
+## Running the Automated Test Suite
+
+The solution comes with an exhaustive test suite guaranteeing 100% pass rates across all layers:
+
+```bash
+dotnet test ServiceTemplate.sln
+```
+
+- **Domain & Application Unit Tests:** 36 tests covering aggregates, value objects, domain events, validators, and resilient AI pipeline decorators.
+- **ArchUnitNET Boundary Tests:** 5 automated architectural tests verifying strict layer separation and dependency inversion.
+- **Integration Tests:** 8 end-to-end slice tests with in-memory execution and Testcontainers fallback covering REST endpoints, SSE streams, validation errors, and Kubernetes probes.

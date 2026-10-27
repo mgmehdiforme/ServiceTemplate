@@ -14,17 +14,31 @@ public static class DependencyInjection
         this IServiceCollection services,
         IConfiguration configuration)
     {
-        var connectionString = configuration.GetConnectionString("Database")
-            ?? "Host=localhost;Port=5432;Database=orders_db;Username=postgres;Password=postgres";
+        var isInMemory = configuration.GetValue<bool>("Testing", false)
+            || configuration.GetValue<bool>("UseInMemoryDatabase", false);
 
-        services.AddDbContext<ApplicationDbContext>(options =>
+        if (isInMemory)
         {
-            options.UseNpgsql(connectionString, npgsql =>
+            var dbName = configuration.GetValue<string>("DatabaseName") ?? "orders_test_db";
+            services.AddDbContext<ApplicationDbContext>(options =>
             {
-                npgsql.UseVector();
-                npgsql.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                options.UseInMemoryDatabase(dbName);
             });
-        });
+        }
+        else
+        {
+            var connectionString = configuration.GetConnectionString("Database")
+                ?? "Host=localhost;Port=5432;Database=orders_db;Username=postgres;Password=postgres";
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseNpgsql(connectionString, npgsql =>
+                {
+                    npgsql.UseVector();
+                    npgsql.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                });
+            });
+        }
 
         services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
 

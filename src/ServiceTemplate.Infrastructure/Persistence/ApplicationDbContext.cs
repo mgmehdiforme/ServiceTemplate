@@ -20,9 +20,19 @@ public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // Enable pgvector extension in PostgreSQL
-        modelBuilder.HasPostgresExtension("vector");
+        if (Database.IsNpgsql())
+        {
+            // Enable pgvector extension in PostgreSQL
+            modelBuilder.HasPostgresExtension("vector");
+        }
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+        if (!Database.IsNpgsql())
+        {
+            modelBuilder.Entity<OrderEmbedding>()
+                .Property(e => e.Embedding)
+                .HasConversion(v => v.ToString(), s => new Pgvector.Vector(s));
+        }
     }
 }

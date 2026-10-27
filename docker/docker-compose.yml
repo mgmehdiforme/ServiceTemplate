@@ -47,6 +47,8 @@ services:
       ConnectionStrings__Database: "Host=postgres;Port=5432;Database=orders_db;Username=postgres;Password=postgres"
       RabbitMQ__Host: "rabbitmq"
       RabbitMQ__Port: 5672
+      Wolverine__PersistMessagesWithPostgresql: "true"
+      Wolverine__UseRabbitMq: "true"
       Ai__Provider: "Mock"
       Ai__ModelId: "offline-mock"
     depends_on:

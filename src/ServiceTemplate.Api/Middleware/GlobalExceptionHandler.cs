@@ -44,7 +44,7 @@ public class GlobalExceptionHandler : IExceptionHandler
                     Instance = httpContext.Request.Path
                 };
 
-                await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
+                await httpContext.Response.WriteAsJsonAsync(problemDetails, options: null, contentType: "application/problem+json", cancellationToken: cancellationToken);
                 return true;
             }
 
@@ -61,7 +61,7 @@ public class GlobalExceptionHandler : IExceptionHandler
                     Instance = httpContext.Request.Path
                 };
 
-                await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
+                await httpContext.Response.WriteAsJsonAsync(problemDetails, options: null, contentType: "application/problem+json", cancellationToken: cancellationToken);
                 return true;
             }
 
@@ -78,7 +78,7 @@ public class GlobalExceptionHandler : IExceptionHandler
                     Instance = httpContext.Request.Path
                 };
 
-                await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
+                await httpContext.Response.WriteAsJsonAsync(problemDetails, options: null, contentType: "application/problem+json", cancellationToken: cancellationToken);
                 return true;
             }
 
@@ -91,11 +91,11 @@ public class GlobalExceptionHandler : IExceptionHandler
                     Status = StatusCodes.Status500InternalServerError,
                     Title = "An error occurred while processing your request.",
                     Type = "https://tools.ietf.org/html/rfc7231#section-6.6.1",
-                    Detail = _environment.IsDevelopment() ? exception.ToString() : "An unexpected internal server error occurred.",
+                    Detail = (_environment.IsDevelopment() || _environment.IsEnvironment("Testing")) ? exception.ToString() : "An unexpected internal server error occurred.",
                     Instance = httpContext.Request.Path
                 };
 
-                await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
+                await httpContext.Response.WriteAsJsonAsync(problemDetails, options: null, contentType: "application/problem+json", cancellationToken: cancellationToken);
                 return true;
             }
         }

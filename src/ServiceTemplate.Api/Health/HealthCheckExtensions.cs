@@ -78,6 +78,11 @@ public class PostgresHealthCheck : IHealthCheck
                 return HealthCheckResult.Healthy("Database context not registered (in-memory mode).");
             }
 
+            if (!dbContext.Database.IsNpgsql())
+            {
+                return HealthCheckResult.Healthy("In-memory database is healthy.");
+            }
+
             var canConnect = await dbContext.Database.CanConnectAsync(cancellationToken);
             if (!canConnect)
             {
@@ -121,9 +126,10 @@ public class RabbitMqHealthCheck : IHealthCheck
         {
             // If offline mock mode or test environment without broker, report healthy or degraded
             var provider = _configuration.GetValue<string>("Ai:Provider");
-            if (string.Equals(provider, "Mock", StringComparison.OrdinalIgnoreCase))
+            var isTest = _configuration.GetValue<bool>("Testing", false);
+            if (string.Equals(provider, "Mock", StringComparison.OrdinalIgnoreCase) || isTest)
             {
-                return HealthCheckResult.Healthy($"RabbitMQ skipped in offline mock mode ({ex.Message})");
+                return HealthCheckResult.Healthy($"RabbitMQ skipped in test/mock mode ({ex.Message})");
             }
 
             return HealthCheckResult.Unhealthy($"RabbitMQ unreachable at {host}:{port}: {ex.Message}");

@@ -1,5 +1,7 @@
 using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using ServiceTemplate.Application.Common.Exceptions;
+using Wolverine;
 
 namespace ServiceTemplate.Application.Common.Behaviours;
 
@@ -8,30 +10,38 @@ namespace ServiceTemplate.Application.Common.Behaviours;
 /// </summary>
 public static class ValidationMiddleware
 {
-    public static async Task BeforeAsync<TMessage>(
-        TMessage message,
-        IEnumerable<IValidator<TMessage>> validators,
+    public static async Task BeforeAsync(
+        Envelope envelope,
+        IServiceProvider serviceProvider,
         CancellationToken cancellationToken)
     {
-        if (message is null)
+        if (envelope.Message is null)
         {
             return;
         }
 
-        var validatorList = validators.ToList();
-        if (validatorList.Count == 0)
+        var message = envelope.Message;
+        var messageType = message.GetType();
+        var validatorType = typeof(IValidator<>).MakeGenericType(messageType);
+        var validators = serviceProvider.GetServices(validatorType).Cast<IValidator>().ToList();
+
+        if (validators.Count == 0)
         {
             return;
         }
 
-        var context = new ValidationContext<TMessage>(message);
-        var validationResults = await Task.WhenAll(
-            validatorList.Select(v => v.ValidateAsync(context, cancellationToken)));
+        var contextType = typeof(ValidationContext<>).MakeGenericType(messageType);
+        var context = (IValidationContext)Activator.CreateInstance(contextType, message)!;
 
-        var failures = validationResults
-            .SelectMany(r => r.Errors)
-            .Where(f => f is not null)
-            .ToList();
+        var failures = new List<FluentValidation.Results.ValidationFailure>();
+        foreach (var validator in validators)
+        {
+            var result = await validator.ValidateAsync(context, cancellationToken);
+            if (result?.Errors is not null)
+            {
+                failures.AddRange(result.Errors.Where(f => f is not null));
+            }
+        }
 
         if (failures.Count != 0)
         {

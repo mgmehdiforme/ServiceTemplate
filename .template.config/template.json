@@ -11,6 +11,19 @@
   },
   "sourceName": "ServiceTemplate",
   "preferNameDirectory": true,
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "**/.git/**",
+            "**/bin/**",
+            "**/obj/**"
+          ]
+        }
+      ]
+    }
+  ],
   "symbols": {
     "includeRabbitMq": {
       "type": "parameter",

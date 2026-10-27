@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>ServiceTemplate.Application</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.1.0-preview.1.25064.3" />
+    <PackageReference Include="Microsoft.SemanticKernel.Core" Version="1.33.0" />
+    <PackageReference Include="WolverineFx" Version="3.13.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceTemplate.Contracts\ServiceTemplate.Contracts.csproj" />
+    <ProjectReference Include="..\ServiceTemplate.Domain\ServiceTemplate.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

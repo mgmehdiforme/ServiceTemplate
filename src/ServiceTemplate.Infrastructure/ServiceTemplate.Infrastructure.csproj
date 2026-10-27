@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>ServiceTemplate.Infrastructure</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.AI" Version="9.1.0-preview.1.25064.3" />
+    <PackageReference Include="Microsoft.Extensions.AI.OpenAI" Version="9.1.0-preview.1.25064.3" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" Version="9.0.0-preview.9.24556.5" />
+    <PackageReference Include="Microsoft.Extensions.Resilience" Version="9.0.0" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.2" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.10.0" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.10.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.9.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.0.0-beta.12" />
+    <PackageReference Include="Pgvector.EntityFrameworkCore" Version="0.2.1" />
+    <PackageReference Include="WolverineFx.EntityFrameworkCore" Version="3.13.5" />
+    <PackageReference Include="WolverineFx.Postgresql" Version="3.13.5" />
+    <PackageReference Include="WolverineFx.RabbitMQ" Version="3.13.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceTemplate.Application\ServiceTemplate.Application.csproj" />
+    <ProjectReference Include="..\ServiceTemplate.Contracts\ServiceTemplate.Contracts.csproj" />
+    <ProjectReference Include="..\ServiceTemplate.Domain\ServiceTemplate.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

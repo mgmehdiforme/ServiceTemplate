@@ -22,6 +22,7 @@
     <ProjectReference Include="..\..\src\ServiceTemplate.Contracts\ServiceTemplate.Contracts.csproj" />
     <ProjectReference Include="..\..\src\ServiceTemplate.Domain\ServiceTemplate.Domain.csproj" />
     <ProjectReference Include="..\..\src\ServiceTemplate.Application\ServiceTemplate.Application.csproj" />
+    <ProjectReference Include="..\..\src\ServiceTemplate.Infrastructure\ServiceTemplate.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
